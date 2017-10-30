@@ -1,0 +1,107 @@
+body {
+  margin: 0;
+}
+
+.title {
+  padding-left: 20px;
+  margin: 0;
+  background: #bbb;
+}
+
+.comment {
+  padding: 20px;
+}
+
+.status{
+  padding: 20px;
+}
+
+.input {
+  background: #888;
+　margin: 0;
+}
+
+.text {
+  border:0;
+  padding: 1px;
+  font-size:1.3em;
+  font-family:Arial, sans-serif;
+  color: #000;
+  border:solid 1px #ccc;
+  margin:3px 20px;
+  width: 80%;
+
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+
+
+.no {
+  font-weight: bold;
+}
+
+.time {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.reply {
+  color: #33f;
+}
+
+
+.goodbtn {
+  padding: 2px 4px;
+  background: #fff;
+  border-style: solid;
+  border-width: 1px;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+
+
+.head, .no, .time, .shout, .good {
+  margin: 0;
+}
+
+.good {
+  margin: 0px 0px 10px 0px;
+}
+
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+.tooltip .tooltiptext {
+    /*width: 120px;*/
+    /*bottom: 100%;
+    left: 50%;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */*/
+}

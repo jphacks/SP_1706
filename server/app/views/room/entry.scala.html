@@ -1,0 +1,12 @@
+@import models.data.Room.Form
+@()
+
+@template.main("新規ルーム作成") {
+    @helper.form(action = routes.RoomController.entry) {
+        URL: <input type="text" name="@Form.url"><br>
+        ルーム名: <input type="text" name="@Form.name"><br>
+        パスワード: <input type="password" name="@Form.password"><br>
+        <input type="submit" value="作成">
+    }
+
+}

@@ -1,0 +1,430 @@
+@charset "uft-8";
+
+body {
+  margin: 0;
+  padding: 0;
+
+  min-width: 920px;
+}
+
+
+/*ヘッダー*/
+#top {
+  background: white;
+  width: 100%;
+  margin: 0;
+  padding-left: 20px;
+}
+
+/*ヘッダーのアイコン*/
+#top img {
+  height: 60px;　/*icon小さく修正*/
+}
+
+
+/* テキスト */
+#text {
+  width: 100%;
+
+  margin: 0;
+  padding-top: 70px;
+  padding-bottom: 70px;
+
+  background: url("../images/background_mz.png");
+
+  text-align: center;
+}
+
+/* 大きく表示される文章 */
+#text .main {
+  font-size: 2.0em;
+}
+
+/* 下に添えるように表示される文章 */
+#text .sub {
+  margin-top: 20px;
+  font-size: 1.25em;
+}
+
+#text li {
+  list-style: none;
+  display: inherit;
+}
+
+
+footer {
+  width: 100%;
+  margin: 0;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+
+  background-color: white;
+}
+
+footer img {
+  margin-right: 30px;
+}
+
+
+
+/*home特有*/
+
+#start {
+  text-align: center;
+  width: 100%;
+
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#start a {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  font-family: sans-serif;
+  font-size: 25px;
+  width: 180px;
+  line-height: 80px;
+  border-radius: 30px;
+  border: 6px solid black;
+  margin: 0 10px 10px;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+  background: white;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+#start a:hover {
+  background: darkgray;
+  border: 5px solid gray;
+  color: whitesmoke;
+  width: 190px;
+  line-height: 90px;
+}
+
+
+#info {
+  background-color: rgb(26, 33, 47);
+  color: rgb(180, 204, 182);
+
+  text-align: center;
+
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+#info table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#info table tr td {
+  padding-left: 20px;
+  padding-right: 20px;
+
+  padding-bottom: 30px;
+}
+
+#info .balloon {
+  padding: 7px 10px;
+  width: 500px;
+  height: 130px;
+
+  color: #555;
+  font-size: 16px;
+  background: #e0edff;
+  border-radius: 15px;
+}
+
+#info img {
+  width: 170px;
+}
+
+
+
+/* createページ */
+
+#form {
+  width: 100%;
+  margin: 0;
+
+  padding-top: 50px;
+  padding-bottom: 20px;
+
+  text-align: center;
+}
+
+#form li {
+  list-style: none;
+}
+
+#form li input {
+  border: 2px #000 solid;
+  width: 300px;
+  height: 30px;
+  margin: 5px 0;
+}
+
+
+#create {
+  text-align: center;
+  width: 100%;
+}
+
+#create  {
+  display: inline;
+}
+
+a {
+  color: black;
+  transition: 0.6s;
+}
+
+a:hover {
+  color: gray;
+}
+
+#create  a {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  font-family: sans-serif;
+  font-size: 20px;
+  width: 120px;
+  line-height: 50px;
+  border-radius: 20px;
+  border: 6px solid black;
+  margin: 0 10px 10px;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+  background: white;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+#create  a:hover {
+  background: darkgray;
+  border: 5px solid gray;
+  color: whitesmoke;
+  width: 130px;
+  line-height: 60px;
+  border-radius: 20px;
+}
+
+
+
+/* URL, joinページ */
+
+#url {
+  width: 100%;
+  margin: 0;
+
+  background-color: #CDE4FF;
+
+  text-align: center;
+}
+
+#url li {
+  margin-bottom: 15px;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+}
+
+#url li a {
+  font-size: 20px;
+  color: mediumseagreen;
+  margin-left: 20px;
+}
+
+#url li a:hover {
+  color: black;
+}
+
+
+
+
+
+/*左のSpace*/
+.title, .comment, .input {
+  padding-left: 20px;
+  width: 100%;
+}
+
+.title, .input {
+  /*position: absolute;をした場合、bosyでmin-widthしても反映されないため*/
+  min-width: 920px;
+}
+
+/*一番上の奴*/
+/*高さの変更を行った場合は.commentのmargin-topの値を変更すること*/
+.title {
+  margin: 0;
+  background: #bbb;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  z-index: 2;
+}
+
+.title img {
+  height: 60px;
+  margin: 0;
+}
+
+
+/*チャット一覧*/
+.comment {
+  /*一番上とかぶらないように*/
+  margin-top: 70px;
+  /*一番下とかぶらないように*/
+  margin-bottom: 70px;
+}
+
+/*コメント入力*/
+.input {
+  background: #888;
+  width: 100%;
+
+  /*絶対位置指定をして一番下に表示*/
+  position: fixed;
+  bottom: 0px;
+}
+
+.input textarea {
+  width: 80%;
+  font-size: 1.3em;
+  height: 40px;
+  margin: 10px;
+  border-radius: 10px;
+  padding-top: 5px;
+  float: left;
+  overflow-x: auto;
+  resize: none;
+}
+
+.input input {
+  -webkit-float: right;
+  width: 100px;
+  height: 42px;
+  margin: 11px;
+  border-radius: 10px;
+  background: white;
+}
+
+.text {
+  border:0;
+  padding: 1px;
+  font-size:1.3em;
+  font-family:Arial, sans-serif;
+  color: #000;
+  border:solid 1px #ccc;
+  margin:3px 20px;
+  width: 80%;
+
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+
+/*レス番*/
+.no {
+  font-weight: bold;
+}
+
+/*バックグラウンドのハイライト*/
+.selfhead {
+  display: inline-block;
+  background-color: rgba(47, 213, 68, 0.3);
+  -webkit-border-radius: 10px;
+}
+
+/*投稿時間*/
+.time {
+  font-size: 0.9em;
+  color: #777;
+}
+
+/*返信のやつ*/
+.reply {
+  color: #33f;
+}
+
+/*ボタン*/
+.btn {
+  padding: 2px 4px;
+  background: #fff;
+  border-style: solid;
+  border-width: 1px;
+
+  -webkit-border-radius: 5px;
+}
+
+
+/* ココらへんはほんと適当過ぎてごめん */
+.head, .no, .time, .shout, .good {
+  margin: 0;
+}
+
+.good {
+  margin: 0px 0px 10px 0px;
+  z-index: 0;
+}
+
+
+/*ホバーさせたい場所*/
+.tooltip {
+  position: relative;
+  display: inline-block;
+
+  width: 100%;
+}
+
+
+
+/*.tooltipをホバーした時に表示させるやつ*/
+/* Tooltip text */
+.tooltip .tooltiptext {
+  /*最初は非表示*/
+  visibility: hidden;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+
+  /*前面に表示*/
+  z-index: 1;
+
+  -webkit-border-radius: 5px;
+}
+
+/*lgtmのtip*/
+.lgtmTip {
+  background-color: rgba(40,40,40,0.8);
+  color: #fff;
+
+  /*ボタンに重ならないように下にずらす*/
+  top: 28px;
+  left: 0;
+
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 6px;
+}
+
+/*replyのtip*/
+.replyTip {
+  background-color: rgba(40,40,40,0.8);
+  color: #fff;
+
+  /*重ならないように上にずらす*/
+  bottom: 28px;
+  left: 0;
+
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 6px;
+}
+
+/* ホバーしたら表示するように */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

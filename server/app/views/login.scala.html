@@ -1,0 +1,12 @@
+@import models.data.LoginForm
+@import models.data.User.Form
+@(url: String)
+
+@template.main("入室認証") {
+    @helper.form(action = routes.SessionController.login) {
+        <input type="hidden" name="@LoginForm.url" value="@url">
+        ルームパスワード:<input type="password" name="@LoginForm.password"><br>
+        ニックネーム:<input type="text" name="@Form.nickName"><br>
+        <input type="submit" value="認証">
+    }
+}

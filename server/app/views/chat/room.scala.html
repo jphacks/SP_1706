@@ -1,0 +1,146 @@
+@import models.data.Room
+@import models.data.User
+@import models.data.Chat.AjaxForm
+@import models.data.Chat.PostForm
+@import models.data.Evaluation
+@import models.data.Evaluation.FromForm
+@(room: Room, user: User)
+
+@template.main(room.name) {
+<script>
+        var no = 0;
+        var comingNewMessage = false;
+        function escape(str) {
+            return $('<span/>').text(str).html().replace(/\r?\n/g, '<br>');
+        }
+
+        function getContentsProc(updateNotifyFlag = true) {
+            $.ajax({
+		        type: "@routes.ChatController.getApi.method",
+                url: "@routes.ChatController.getApi.url",
+                data: "@AjaxForm.userId=@user.id&@AjaxForm.roomId=@room.id&@{AjaxForm.no}=" + no,
+                success: function(json) {
+                    $.each(json, function(i, elem) {
+                        no = elem.no;
+                        comingNewMessage = updateNotifyFlag && true;
+                        if (!($('#chat-' + no)[0])) {
+                            var tooltipTextNo = elem.replyTo;
+                            console.log('replyNo -> ' + tooltipTextNo);
+                            var tooltipText = "";
+                            if (tooltipTextNo != undefined) {
+                                if (!($('#shout-' + tooltipTextNo + ' > .tooltiptext')[0])) {
+                                    tooltipText = '<div class="tooltiptext replyTip">' + $('#shout-' + tooltipTextNo).html() + '</div>';
+                                } else {
+                                    var nextTooltip = $('#shout-' + tooltipTextNo + ' > .tooltiptext').html();
+                                    var addTooltip = $('#shout-' + tooltipTextNo).text();
+                                    tooltipText = '<div class="tooltiptext replyTip">' + nextTooltip + '<br><hr>' + addTooltip.slice(nextTooltip.length) + '</div>';
+                                }
+                            }
+                            var noClass = "no";
+                            var headClass = "head";
+                            if (elem.isSelf) {
+                                noClass += " selfshout"
+                                headClass += " selfhead"
+                            }
+                            var head = '<div class="' + headClass + '"><span class="' + noClass + '">' + escape(elem.no) +
+                                       ' </span>:<span class="time">' + escape(elem.timeStamp) + '</span></div>';
+                            var shout = '<div id="shout-' + no + '" class="tooltip shout">' + tooltipText + escape(elem.content) +'</div>';
+                            var good = '<div class="good"><input type="button" class="replybtn btn" data-to="@@' + no + ' " value="返信"><div class="tooltip"><input type="button" data-no="' + no + '" class="btn goodbtn" value="LGTM 👍"><span id="good-' + no + '" /><span id="tt-' + no + '"></div></div></div>';
+                            $('.comment').append(head + shout + good);
+                        }
+                    });
+                }
+		     });
+        }
+
+        function getEvaluationProc() {
+            $.ajax({
+                type: "@routes.ChatController.getEvaluationApi.method",
+                url: "@routes.ChatController.getEvaluationApi.url",
+                data: "@AjaxForm.roomId=@room.id",
+                success: function(json) {
+                    $.each(json, function(no, num) {
+                        $('#good-' + no).text(num);
+                    });
+                }
+            });
+        }
+
+        function getEvaluationFromProc() {
+            $.ajax({
+                type: "@routes.ChatController.getEvaluationFromApi.method",
+                url: "@routes.ChatController.getEvaluationFromApi.url",
+                data: "@FromForm.roomId=@room.id&@FromForm.userId=@user.id",
+                success: function(json) {
+                    $.each(json, function(no, nickNames) {
+                        $('#tt-' + no).html('<span class="tooltiptext lgtmTip">' + nickNames.map(function(x){ return escape(x); }).join('<br>') + '</span>');
+                    });
+                }
+            });
+        }
+
+        function makeEvalPostData(no) {
+            return "@Evaluation.Form.roomId=@room.id&@Evaluation.Form.userId=@user.id&@Evaluation.Form.evaluationType=Good&@Evaluation.Form.no=" + no;
+        }
+
+        function makeContentPostData() {
+            return "@PostForm.roomId=@room.id&@PostForm.userId=@user.id&@PostForm.content=" + $('#content').val();
+        }
+
+        $(function() {
+            getContentsProc(false);
+            getEvaluationProc();
+            Notification.requestPermission();
+            $('#post').on("click", function() {
+                $.ajax({
+                    type: "@routes.ChatController.postApi.method",
+                    url: "@routes.ChatController.postApi.url",
+                    data: makeContentPostData(),
+                    success: function(json) {
+                        $('#content').val('');
+                        getContentsProc(false);
+                       // no = json.no;
+                       // var head = '<div class="head"><span class="no">' + escape(json.no) +
+                       //            ' :</span><span class="time">' + escape(json.timeStamp) + '</span></div>';
+                       // var shout = '<div class="shout">' + escape(json.content) +'</div>'
+                       // var good = '<div class="good"><div class="tooltip"><input type="button" data-no="' + no + '" class="goodbtn" value="👍"><span id="good-' + no + '" /><span id="tt-' + no + '"></span></div></div>'
+                       // $('.comment').append(head + shout + good);
+                    }
+                });
+            });
+            $(document).on('click', '.goodbtn', function(){
+                $.ajax({
+                    type: "@routes.ChatController.evaluationApi.method",
+                    url: "@routes.ChatController.evaluationApi.url",
+                    data: makeEvalPostData($(this).data('no')),
+                    success: function() {
+                        getEvaluationProc();
+                    }
+                });
+            });
+
+            $(document).on('click', '.replybtn', function(){
+                $('#content').val($(this).data('to') + $('#content').val()).focus();
+            });
+            setInterval(function(){
+		        getContentsProc();
+		        getEvaluationProc();
+		        getEvaluationFromProc();
+		        if (comingNewMessage) {
+		            new Notification('新しい投稿があります');
+		            comingNewMessage = false;
+		        }
+	        },3000);
+        });
+
+</script>
+<div class="">
+    <div class="title">議題：@room.name</div>
+    <div class="comment">
+    </div>
+</div>
+<div class="input">
+<textarea id="content" name="@PostForm.content"></textarea>
+<input type="button" id="post" value="投稿">
+</div>
+}
